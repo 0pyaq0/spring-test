@@ -2,13 +2,12 @@ package com.shop.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
 @Table(name="cart_item")
-public class CartItem extends BaseEntity{
+public class CartItem extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -33,12 +32,11 @@ public class CartItem extends BaseEntity{
         return cartItem;
     }
 
-    public void addCount(int count) {
+    public void addCount(int count){
         this.count += count;
     }
 
     public void updateCount(int count){
         this.count = count;
     }
-
 }

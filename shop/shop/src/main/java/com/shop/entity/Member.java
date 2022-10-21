@@ -10,13 +10,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "member")
+@Table(name="member")
 @Getter @Setter
 @ToString
-public class Member extends BaseEntity{
+public class Member extends BaseEntity {
 
     @Id
-    @Column(name = "member_id")
+    @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -26,6 +26,7 @@ public class Member extends BaseEntity{
     private String email;
 
     private String password;
+
     private String address;
 
     @Enumerated(EnumType.STRING)

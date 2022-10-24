@@ -44,6 +44,21 @@ function App() {
     console.log("할일 추가되었음")
   }
 
+  function updateTodo(id){
+    const updateTodo = async() => {
+      await axios
+            .put(baseUrl + "/todo/" + id, {})
+            .then((response) => {
+              console.log(response.data)
+              getTodos();
+            })
+            .catch((error)=>{
+              console.error(error);
+            })
+    }
+    updateTodo();
+  }
+
   function changeText(e){
     e.preventDefault();
     setInput(e.target.value)
@@ -66,7 +81,9 @@ function App() {
           return(
             <div className="todo" key={todo.id}>
               <h3>
-                <label onClick={null}>
+                <label 
+                className={todo.completed ? "completed" : null}
+                onClick={() => updateTodo(todo.id)}>
                   {todo.todoName}
                 </label>
               </h3>

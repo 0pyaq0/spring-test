@@ -44,17 +44,21 @@ function App() {
     console.log("할일 추가되었음")
   }
 
-  function updateTodo(id){
-    const updateTodo = async() => {
+  function updateTodo(id) {
+    const updateTodo = async () => {
       await axios
-            .put(baseUrl + "/todo/" + id, {})
-            .then((response) => {
-              console.log(response.data)
-              getTodos();
-            })
-            .catch((error)=>{
-              console.error(error);
-            })
+        .put(baseUrl + "/todo/" + id, {})
+        .then((response) => {
+          setTodos(
+            todos.map((todo) =>
+              todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            )
+          );
+          console.log(todos);
+        })
+        .catch((error) => {
+          console.error(error);
+        });  
     }
     updateTodo();
   }

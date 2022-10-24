@@ -63,6 +63,22 @@ function App() {
     updateTodo();
   }
 
+  function deleteTodo(id) {
+    const deleteTodo = async () => {
+      await axios
+            .delete(baseUrl + "/todo/" + id, {})
+            .then((response) => {
+              setTodos(
+                todos.filter((todo) => todo.id !== id)
+              )
+            })
+            .catch((error) => {
+              console.error(error);
+            })
+    }
+    deleteTodo();
+  }
+
   function changeText(e){
     e.preventDefault();
     setInput(e.target.value)
@@ -90,6 +106,7 @@ function App() {
                 onClick={() => updateTodo(todo.id)}>
                   {todo.todoName}
                 </label>
+                <label onClick={() => deleteTodo(todo.id)}>&nbsp;&nbsp;&nbsp;❌</label>
               </h3>
             </div>
           )

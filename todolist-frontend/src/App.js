@@ -23,6 +23,27 @@ function App() {
     })
   }
 
+  function insertTodo(e){
+    e.preventDefault();
+
+    const insertTodo = async() => {
+      await axios
+            .post(baseUrl + "/todo", {
+              todoName:input
+            })
+            .then((response) => {
+              console.log(response.data)
+              setInput("");
+              getTodos();
+            })
+            .catch((error)=>{
+              console.error(error);
+            })
+    }
+    insertTodo();
+    console.log("할일 추가되었음")
+  }
+
   function changeText(e){
     e.preventDefault();
     setInput(e.target.value)
@@ -31,7 +52,7 @@ function App() {
   return (
     <div className="App">
       <h1>TODO LIST</h1>
-      <form>
+      <form onSubmit={insertTodo}>
         <label>
         Todo &nbsp;
         <input type="text" required={true} value={input} onChange={changeText}/>
@@ -43,7 +64,7 @@ function App() {
         todos
         ? todos.map((todo)=>{
           return(
-            <div className="todo">
+            <div className="todo" key={todo.id}>
               <h3>
                 <label onClick={null}>
                   {todo.todoName}
